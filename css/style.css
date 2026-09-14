@@ -1,1 +1,249 @@
-/* styly přidáme v dalším kroku */
+:root {
+    --barva-pozadi: #1a1815;
+    --barva-pozadi-svetlejsi: #24211d;
+    --barva-text: #ede7dc;
+    --barva-text-tlumena: #a89f8f;
+    --barva-akcent: #c08a34;
+    --barva-akcent-tmava: #8f6522;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: var(--barva-pozadi);
+    color: var(--barva-text);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1, h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: normal;
+}
+
+a {
+    color: var(--barva-akcent);
+    text-decoration: none;
+}
+
+/* --- Header a navigace --- */
+
+header {
+    position: sticky;
+    top: 0;
+    padding: 1rem 1.5rem 0;
+    z-index: 10;
+}
+
+nav {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--barva-pozadi-svetlejsi);
+    border: 1px solid var(--barva-akcent-tmava);
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+.logo {
+    font-family: Georgia, serif;
+    font-size: 1.4rem;
+    color: var(--barva-text);
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 0.6rem;
+}
+
+.nav-links a {
+    display: inline-block;
+    color: var(--barva-text);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-links a:hover {
+    background-color: var(--barva-akcent-tmava);
+}
+
+.nav-links a.active {
+    background-color: var(--barva-akcent);
+    color: var(--barva-pozadi);
+    font-weight: bold;
+}
+
+/* --- Hlavní obsah --- */
+
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+section {
+    padding: 4rem 0;
+}
+
+/* --- Hero sekce --- */
+
+.hero {
+    text-align: center;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    color: var(--barva-text);
+    margin-bottom: 1.2rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--barva-text-tlumena);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* --- Služby --- */
+
+.sluzby h2, .ukazka h2, .galerie h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--barva-akcent);
+}
+
+.sluzby ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.sluzby li {
+    background-color: var(--barva-pozadi-svetlejsi);
+    border: 1px solid var(--barva-akcent-tmava);
+    padding: 1.2rem;
+    border-radius: 4px;
+    text-align: center;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.15rem;
+    letter-spacing: 0.3px;
+}
+
+/* --- Ukázka práce (Home) a Galerie --- */
+
+.ukazka-obrazky,
+.galerie-mrizka {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.ukazka-obrazky img,
+.galerie-mrizka img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 4px;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.ukazka-obrazky img:hover,
+.galerie-mrizka img:hover {
+    transform: scale(1.03);
+}
+
+.odkaz-galerie {
+    display: inline-block;
+    color: var(--barva-akcent);
+    font-weight: bold;
+}
+
+.odkaz-galerie:hover {
+    color: var(--barva-text);
+}
+
+/* --- Kontakt --- */
+
+.kontakt p {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* --- Footer --- */
+
+main {
+    flex: 1 0 auto;
+    width: 100%;
+}
+
+footer {
+    flex-shrink: 0;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--barva-text-tlumena);
+    border-top: 1px solid var(--barva-akcent-tmava);
+}
+
+/* --- Lightbox (zvětšení obrázku na celou obrazovku) --- */
+
+.lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+    z-index: 100;
+}
+
+.lightbox-overlay.aktivni {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lightbox-overlay img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 4px;
+}
+
+/* --- Responzivita --- */
+
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+}
