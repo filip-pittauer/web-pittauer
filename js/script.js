@@ -12,25 +12,65 @@ document.addEventListener("DOMContentLoaded", () => {
 
     animovaneSekce.forEach((sekce) => pozorovatel.observe(sekce));
 
-    const obrazky = document.querySelectorAll(".galerie-mrizka img");
+    const obrazky = Array.from(document.querySelectorAll(".galerie-mrizka img"));
     if (obrazky.length === 0) return;
+
+    let aktualniIndex = 0;
 
     const overlay = document.createElement("div");
     overlay.className = "lightbox-overlay";
 
+    const tlacitkoPredchozi = document.createElement("button");
+    tlacitkoPredchozi.className = "lightbox-sipka";
+    tlacitkoPredchozi.textContent = "‹";
+    tlacitkoPredchozi.setAttribute("aria-label", "Předchozí obrázek");
+
     const zvetsenyObrazek = document.createElement("img");
-    overlay.appendChild(zvetsenyObrazek);
+
+    const tlacitkoDalsi = document.createElement("button");
+    tlacitkoDalsi.className = "lightbox-sipka";
+    tlacitkoDalsi.textContent = "›";
+    tlacitkoDalsi.setAttribute("aria-label", "Další obrázek");
+
+    overlay.append(tlacitkoPredchozi, zvetsenyObrazek, tlacitkoDalsi);
     document.body.appendChild(overlay);
 
-    obrazky.forEach((img) => {
+    function zobrazObrazek(index) {
+        aktualniIndex = (index + obrazky.length) % obrazky.length;
+        const img = obrazky[aktualniIndex];
+        zvetsenyObrazek.src = img.src;
+        zvetsenyObrazek.alt = img.alt;
+    }
+
+    function zavriLightbox() {
+        overlay.classList.remove("aktivni");
+    }
+
+    obrazky.forEach((img, index) => {
         img.addEventListener("click", () => {
-            zvetsenyObrazek.src = img.src;
-            zvetsenyObrazek.alt = img.alt;
+            zobrazObrazek(index);
             overlay.classList.add("aktivni");
         });
     });
 
-    overlay.addEventListener("click", () => {
-        overlay.classList.remove("aktivni");
+    tlacitkoPredchozi.addEventListener("click", (udalost) => {
+        udalost.stopPropagation();
+        zobrazObrazek(aktualniIndex - 1);
+    });
+
+    tlacitkoDalsi.addEventListener("click", (udalost) => {
+        udalost.stopPropagation();
+        zobrazObrazek(aktualniIndex + 1);
+    });
+
+    zvetsenyObrazek.addEventListener("click", (udalost) => udalost.stopPropagation());
+
+    overlay.addEventListener("click", zavriLightbox);
+
+    document.addEventListener("keydown", (udalost) => {
+        if (!overlay.classList.contains("aktivni")) return;
+        if (udalost.key === "Escape") zavriLightbox();
+        if (udalost.key === "ArrowLeft") zobrazObrazek(aktualniIndex - 1);
+        if (udalost.key === "ArrowRight") zobrazObrazek(aktualniIndex + 1);
     });
 });

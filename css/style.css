@@ -230,9 +230,35 @@ footer {
 }
 
 .lightbox-overlay img {
-    max-width: 90%;
+    max-width: 80%;
     max-height: 90%;
     border-radius: 4px;
+}
+
+.lightbox-sipka {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--barva-text);
+    font-size: 2.2rem;
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.lightbox-sipka:hover {
+    background-color: var(--barva-akcent);
+    color: var(--barva-pozadi);
+}
+
+@media (max-width: 600px) {
+    .lightbox-sipka {
+        width: 40px;
+        height: 40px;
+        font-size: 1.6rem;
+    }
 }
 
 /* --- Animace při scrollu --- */
