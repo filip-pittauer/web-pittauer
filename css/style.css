@@ -42,7 +42,7 @@ a {
 header {
     position: sticky;
     top: 0;
-    padding: 1rem 1.5rem 0;
+    padding: 1rem 1.5rem;
     z-index: 10;
 }
 
@@ -107,6 +107,22 @@ section {
     padding: 4rem 0;
 }
 
+/* Domovská stránka: sekce jedou přes celou šířku obrazovky,
+   obsah uvnitř se pak sám vystředí přes .obsah */
+
+.stranka-domu .uvodni-blok,
+.stranka-domu main {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+.obsah {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
 /* --- Hero sekce --- */
 
 .hero {
@@ -115,7 +131,6 @@ section {
     background-image: linear-gradient(rgba(26, 24, 21, 0.8), rgba(26, 24, 21, 0.92)), url("../img/rytba-4.jpg");
     background-size: cover;
     background-position: center;
-    border-radius: 8px;
 }
 
 .hero h1 {
@@ -132,6 +147,10 @@ section {
 }
 
 /* --- Služby --- */
+
+.stranka-domu .sluzby {
+    background-color: var(--barva-pozadi-svetlejsi);
+}
 
 .sluzby h2, .ukazka h2, .galerie h1 {
     font-size: 2rem;
