@@ -60,10 +60,19 @@ nav {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
     font-family: Georgia, serif;
     font-size: 1.4rem;
     color: var(--barva-text);
     letter-spacing: 1px;
+}
+
+.logo img {
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
 }
 
 .nav-links {
